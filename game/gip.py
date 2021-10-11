@@ -4,9 +4,6 @@ Author: James Penales
 """
 
 
-
-
-
 class Player:
     """ This class is to represent a real world player"""
     def __init__(self, name, turn, score):
