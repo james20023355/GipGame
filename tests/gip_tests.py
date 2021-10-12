@@ -14,3 +14,22 @@ class GipGameTests(unittest.TestCase):
         # Assert
         self.assertIsNotNone(result)
 
+    def test_isWinner(self):
+        # Arrange
+        game = gip.GipGame()
+        player = gip.Player("Joanna", False)
+        player.score = 100
+
+        self.assertTrue(game.isWinner(player))
+
+    def test_updateScore(self):
+        # Arrange
+        game  = gip.GipGame
+        player = gip.Player("Jorthan", False)
+        expected = 5
+
+        # Act
+        player.updateScore(5)
+
+        # Assert 
+        self.assertEqual(player.score, expected)
