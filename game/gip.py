@@ -15,7 +15,6 @@ class Player:
         self.score += score
 
 
-
 class GipGame:
     """ This Class is in charge of the logic of the GitGame"""
     def __init__(self):
@@ -35,14 +34,6 @@ class GipGame:
                 else:
                     self.switchTurns(player, player2,  True)
 
-            elif rollAgain == 'N' and player2.turn:
-                    player.turn = True
-                    player2.turn = False
-                    print(f"\n> [{player2.name}]  Congrats you earned: {self.turnScore} Points")
-                    player2.updateScore(self.turnScore)
-                    print(f"> [{player2.name}]  Your Current Score is: {player2.score}\n")
-                    self.turnScore = 0
-
             elif rollAgain == 'N' and player.turn:
                 player.turn = False
                 player2.turn = True
@@ -50,6 +41,23 @@ class GipGame:
                 player.updateScore(self.turnScore)
                 print(f"> [{player.name}] Your Current Score is: {player.score}\n")
                 self.turnScore = 0
+                if self.isWinner(player):
+                    player.turn = False
+                    player2.turn = False
+                    self.currentlyPlaying = False
+
+            elif rollAgain == 'N' and player2.turn:
+                player.turn = True
+                player2.turn = False
+                print(f"\n> [{player2.name}]  Congrats you earned: {self.turnScore} Points")
+                player2.updateScore(self.turnScore)
+                print(f"> [{player2.name}]  Your Current Score is: {player2.score}\n")
+                self.turnScore = 0
+                if self.isWinner(player2):
+                    player.turn = False
+                    player2.turn = False
+                    self.currentlyPlaying = False
+
             else:
                 print("Error: Wrong Input!")
                 self.switchTurns(player, player2, False)
@@ -57,18 +65,17 @@ class GipGame:
         else:
 
             if player.turn:
-                print(f"Sorry {player.name}, you rolled a 1. You lost all your points for this turn :(\n")
+                print(f"> [{player.name}]Sorry {player.name}, you rolled a 1. You lost all your points for this turn\n")
                 player.turn = False
                 player2.turn = True
+                time.sleep(0.5)
 
             elif player2.turn:
-                print(f"Sorry {player2.name}, you rolled a 1. You lost all your points for this turn :(\n")
+                print(f"> [{player2.name}]Sorry {player2.name}, you rolled a 1. You lost all your points for this turn\n")
                 player.turn = True
                 player2.turn = False
+                time.sleep(0.5)
             self.turnScore = 0
-
-
-
 
     def rollDice(self):
         """ this method handles the logic for a dice roll"""
@@ -81,21 +88,20 @@ class GipGame:
             return False
 
 
-
     def play(self):
         self.currentlyPlaying = True;
         print("> [GipGame] Hello and Welcome to Gip Game.")
-        time.sleep(2)
+        time.sleep(1)
 
         p1Name = input("> [GipGame] Player 1, Please Enter your Name: ")
         time.sleep(0.5)
         p2Name = input("> [GipGame] Player 2, Please Enter your Name: ")
 
-        time.sleep(2)
+        time.sleep(1)
         player1 = Player(p1Name, True)
         player2 = Player(p2Name, False)
         print(f"> [GipGame] Welcome to the game {p1Name} and {p2Name} \n")
-        time.sleep(2)
+        time.sleep(1)
         while self.currentlyPlaying:
                 if player1.turn:
                     if self.turnScore == 0:
@@ -121,10 +127,12 @@ class GipGame:
                         self.switchTurns(player1, player2, False)
 
 
-
-
-    def isWinner(self, winner):
-        return winner
+    def isWinner(self, player):
+        if player.score >= 100:
+            print(f"{player.name} Wins")
+            return True
+        else:
+            return False
 
 
 class Dice:
