@@ -6,12 +6,13 @@ import time
 
 class Player:
     """ This class is to represent a real world player"""
-    def __init__(self, name,turn):
-        self.name = name
-        self.turn = turn
-        self.score = 0
+    def __init__(self, name, turn):
+        self.name = name  # Represents Player Name
+        self.turn = turn  # Represents whether or not it is a player's turn
+        self.score = 0  # Represents a player's overall score
 
     def updateScore(self, score):
+        """ This method updates a player's score"""
         self.score += score
 
 
@@ -21,11 +22,11 @@ class GipGame:
         self.currentlyPlaying = False
         self.turnScore = 0
 
-
     def switchTurns(self, player, player2, n):
         """ This method is used to switch the players' turns """
         if not n:
-            rollAgain = input(f"> [GipGame]({self.turnScore}) Would you like to roll again?[Y/N]: ").upper()
+            rollAgain = input(f"> [GipGame](Turn Score: {self.turnScore}) Would you like to roll again?[Y/N]: ").upper()
+
             if rollAgain == 'Y':
                 result = self.rollDice()
 
@@ -65,13 +66,13 @@ class GipGame:
         else:
 
             if player.turn:
-                print(f"> [{player.name}]Sorry {player.name}, you rolled a 1. You lost all your points for this turn\n")
+                print(f"> [{player.name}] Sorry {player.name}, you rolled a 1. You lost all your points for this turn\n")
                 player.turn = False
                 player2.turn = True
                 time.sleep(0.5)
 
             elif player2.turn:
-                print(f"> [{player2.name}]Sorry {player2.name}, you rolled a 1. You lost all your points for this turn\n")
+                print(f"> [{player2.name}] Sorry {player2.name}, you rolled a 1. You lost all your points for this turn\n")
                 player.turn = True
                 player2.turn = False
                 time.sleep(0.5)
@@ -87,47 +88,80 @@ class GipGame:
         else:
             return False
 
+    def introMessage(self):
+        """ This method is in charge of the introduction to the game"""
+        playIntro = input("> [GipGame] Would you like to know the rules of GipGame? [Y/N]: ").upper()
+
+        if playIntro == 'Y':
+            print("> [GipGame] The Rules of the game are simple .. ")
+            time.sleep(2)
+            print("> [GipGame] Each player gets a turn to roll a die, if the player rolls a number between 2 and 6.")
+            time.sleep(5)
+            print("> [GipGame] That number is added to the overall score for that turn.")
+            time.sleep(4)
+            print("> [GipGame] The player will have the option to keep re-rolling.")
+            time.sleep(4)
+            print("> [GipGame] But if they roll a 1, the amount of points built up in that turn is lost.")
+            time.sleep(5)
+            print("> [GipGame] And the other player gets a turn")
+            time.sleep(4)
+            print("> [GipGame] First Person to 100 wins.")
+            time.sleep(2)
+            print("> [GipGame] Good Luck.\n")
+            time.sleep(3)
+        elif playIntro == 'N':
+            print("> [GipGame] Alright. Player 1 will now roll\n")
+            time.sleep(1.5)
+        else:
+            print("[GipGame] Wrong input, try again")
+            self.introMessage()
 
     def play(self):
-        self.currentlyPlaying = True;
+        """ This method is to handle the game process"""
+        self.currentlyPlaying = True
+
         print("> [GipGame] Hello and Welcome to Gip Game.")
         time.sleep(1)
-
         p1Name = input("> [GipGame] Player 1, Please Enter your Name: ")
         time.sleep(0.5)
         p2Name = input("> [GipGame] Player 2, Please Enter your Name: ")
-
         time.sleep(1)
         player1 = Player(p1Name, True)
         player2 = Player(p2Name, False)
-        print(f"> [GipGame] Welcome to the game {p1Name} and {p2Name} \n")
+        print(f"\n> [GipGame] Welcome to the game {p1Name} and {p2Name} \n")
         time.sleep(1)
+
+        self.introMessage()
+
+
         while self.currentlyPlaying:
-                if player1.turn:
-                    if self.turnScore == 0:
-                        firstRoll = self.rollDice()
+            if player1.turn:
+                if self.turnScore == 0:
 
-                        if firstRoll !=  False:
-                            print(f"> [{p1Name}]: Your first roll for this round is: ", firstRoll,"\n")
-                        else:
-                            self.switchTurns(player1, player2, True)
+                    firstRoll = self.rollDice()
+
+                    if firstRoll:
+
+                        print(f"> [{p1Name}](Points: {player1.score}): Your first roll for this round is: ", firstRoll,"\n")
                     else:
-                        self.switchTurns(player1, player2, False)
+                        self.switchTurns(player1, player2, True)
+                else:
+                    self.switchTurns(player1, player2, False)
 
-                time.sleep(1)
-                if player2.turn:
-                    if self.turnScore == 0:
-                        firstRoll = self.rollDice()
+            time.sleep(1)
+            if player2.turn:
+                if self.turnScore == 0:
+                    firstRoll = self.rollDice()
 
-                        if firstRoll != False:
-                            print(f"> [{p2Name}]: Your first roll for this round is: ", firstRoll,"\n")
-                        else:
-                            self.switchTurns(player1, player2, True)
+                    if firstRoll:
+                        print(f"> [{p2Name}](Points: {player2.score}): Your first roll for this round is: ", firstRoll,"\n")
                     else:
-                        self.switchTurns(player1, player2, False)
-
+                        self.switchTurns(player1, player2, True)
+                else:
+                    self.switchTurns(player1, player2, False)
 
     def isWinner(self, player):
+        """ This Method returns a boolean value based on whether or not a player has reached 100 points"""
         if player.score >= 100:
             print(f"{player.name} Wins")
             return True
