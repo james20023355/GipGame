@@ -4,6 +4,7 @@ Author: James Penales
 """
 import time
 
+
 class Player:
     """ This class is to represent a real world player"""
     def __init__(self, name, turn):
