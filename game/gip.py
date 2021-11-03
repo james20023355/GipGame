@@ -3,6 +3,172 @@ This File Contains the code for the Git Game
 Author: James Penales
 """
 import time
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_StartWindow(object):
+    def setupUi(self, StartWindow):
+        StartWindow.setObjectName("StartWindow")
+        StartWindow.resize(597, 396)
+        self.centralwidget = QtWidgets.QWidget(StartWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.titleLbl = QtWidgets.QLabel(self.centralwidget)
+        self.titleLbl.setGeometry(QtCore.QRect(190, 70, 211, 81))
+        font = QtGui.QFont()
+        font.setFamily("Kristen ITC")
+        font.setPointSize(32)
+        self.titleLbl.setFont(font)
+        self.titleLbl.setObjectName("titleLbl")
+        self.playBtn = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow())
+        self.playBtn.clicked.connect(StartWindow.close)
+        self.playBtn.setGeometry(QtCore.QRect(210, 220, 151, 41))
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(15, 157, 88))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+        self.playBtn.setPalette(palette)
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        font.setBold(True)
+        font.setWeight(75)
+        self.playBtn.setFont(font)
+        self.playBtn.setStyleSheet("background: #0F9D58; \n"
+        "border: 0px solid black;\n"
+        "color:white; \n"
+        "border-radius: 10%;")
+        self.playBtn.setAutoDefault(False)
+        self.playBtn.setObjectName("playBtn")
+        StartWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(StartWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 597, 21))
+        self.menubar.setObjectName("menubar")
+        StartWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(StartWindow)
+        self.statusbar.setObjectName("statusbar")
+        StartWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(StartWindow)
+        QtCore.QMetaObject.connectSlotsByName(StartWindow)
+
+
+    def retranslateUi(self, StartWindow):
+        _translate = QtCore.QCoreApplication.translate
+        StartWindow.setWindowTitle(_translate("StartWindow", "MainWindow"))
+        self.titleLbl.setText(_translate("StartWindow", "GipGame"))
+        self.playBtn.setText(_translate("StartWindow", "Play"))
+
+    def openWindow(self):
+
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_PlayerEntryWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+
+class Ui_PlayerEntryWindow(object):
+    def setupUi(self, PlayerEntryWindow):
+        PlayerEntryWindow.setObjectName("PlayerEntryWindow")
+        PlayerEntryWindow.resize(245, 280)
+        self.centralwidget = QtWidgets.QWidget(PlayerEntryWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.titleLbl = QtWidgets.QLabel(self.centralwidget)
+        self.titleLbl.setGeometry(QtCore.QRect(60, 20, 121, 41))
+        font = QtGui.QFont()
+        font.setFamily("Kristen ITC")
+        font.setPointSize(18)
+        self.titleLbl.setFont(font)
+        self.titleLbl.setObjectName("titleLbl")
+        self.p1EntryLbl = QtWidgets.QLabel(self.centralwidget)
+        self.p1EntryLbl.setGeometry(QtCore.QRect(30, 110, 47, 13))
+        self.p1EntryLbl.setObjectName("p1EntryLbl")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(30, 140, 47, 13))
+        self.label_2.setObjectName("label_2")
+        self.p1Entry = QtWidgets.QLineEdit(self.centralwidget)
+        self.p1Entry.setGeometry(QtCore.QRect(80, 110, 113, 20))
+        self.p1Entry.setObjectName("p1Entry")
+        self.p2Entry = QtWidgets.QLineEdit(self.centralwidget)
+        self.p2Entry.setGeometry(QtCore.QRect(80, 140, 113, 20))
+        self.p2Entry.setObjectName("p2Entry")
+        self.submitPlayerbtn = QtWidgets.QPushButton(self.centralwidget)
+        self.submitPlayerbtn.setGeometry(QtCore.QRect(120, 180, 75, 23))
+        self.submitPlayerbtn.setObjectName("submitPlayerbtn")
+        self.introLbl = QtWidgets.QLabel(self.centralwidget)
+        self.introLbl.setGeometry(QtCore.QRect(70, 70, 91, 16))
+        self.introLbl.setObjectName("introLbl")
+        PlayerEntryWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(PlayerEntryWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 245, 21))
+        self.menubar.setObjectName("menubar")
+        PlayerEntryWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(PlayerEntryWindow)
+        self.statusbar.setObjectName("statusbar")
+        PlayerEntryWindow.setStatusBar(self.statusbar)
+
+        self.introLbl.setText("Hello and Welcome to Gip Game.")
+        self.introLbl.adjustSize()
+        self.retranslateUi(PlayerEntryWindow)
+        QtCore.QMetaObject.connectSlotsByName(PlayerEntryWindow)
+
+    def retranslateUi(self, PlayerEntryWindow):
+        _translate = QtCore.QCoreApplication.translate
+        PlayerEntryWindow.setWindowTitle(_translate("PlayerEntryWindow", "MainWindow"))
+        self.titleLbl.setText(_translate("PlayerEntryWindow", "GipGame"))
+        self.p1EntryLbl.setText(_translate("PlayerEntryWindow", "Player 1"))
+        self.label_2.setText(_translate("PlayerEntryWindow", "Player 2"))
+        self.submitPlayerbtn.setText(_translate("PlayerEntryWindow", "Submit"))
 
 
 class Player:
@@ -23,6 +189,50 @@ class GipGame:
         self.currentlyPlaying = False
         self.turnScore = 0
 
+    def play(self):
+        """ This method is to handle the game process"""
+        self.currentlyPlaying = True
+        print("> [GipGame] ")
+
+        time.sleep(1)
+        p1Name = input("> [GipGame] Player 1, Please Enter your Name: ")
+        time.sleep(0.5)
+        p2Name = input("> [GipGame] Player 2, Please Enter your Name: ")
+        time.sleep(1)
+        player1 = Player(p1Name, True)
+        player2 = Player(p2Name, False)
+        print(f"\n> [GipGame] Welcome to the game {p1Name} and {p2Name} \n")
+        time.sleep(1)
+
+        self.introMessage()
+
+        while self.currentlyPlaying:
+            if player1.turn:
+                if self.turnScore == 0:
+
+                    firstRoll = self.rollDice()
+
+                    if firstRoll:
+
+                        print(f"> [{p1Name}](Points: {player1.score}): Your first roll for this round is: ", firstRoll,
+                              "\n")
+                    else:
+                        self.switchTurns(player1, player2, True)
+                else:
+                    self.switchTurns(player1, player2, False)
+
+            time.sleep(1)
+            if player2.turn:
+                if self.turnScore == 0:
+                    firstRoll = self.rollDice()
+
+                    if firstRoll:
+                        print(f"> [{p2Name}](Points: {player2.score}): Your first roll for this round is: ", firstRoll,
+                              "\n")
+                    else:
+                        self.switchTurns(player1, player2, True)
+                else:
+                    self.switchTurns(player1, player2, False)
     def switchTurns(self, player, player2, n):
         """ This method is used to switch the players' turns """
         if not n:
@@ -117,49 +327,7 @@ class GipGame:
             print("[GipGame] Wrong input, try again")
             self.introMessage()
 
-    def play(self):
-        """ This method is to handle the game process"""
-        self.currentlyPlaying = True
 
-        print("> [GipGame] Hello and Welcome to Gip Game.")
-        time.sleep(1)
-        p1Name = input("> [GipGame] Player 1, Please Enter your Name: ")
-        time.sleep(0.5)
-        p2Name = input("> [GipGame] Player 2, Please Enter your Name: ")
-        time.sleep(1)
-        player1 = Player(p1Name, True)
-        player2 = Player(p2Name, False)
-        print(f"\n> [GipGame] Welcome to the game {p1Name} and {p2Name} \n")
-        time.sleep(1)
-
-        self.introMessage()
-
-
-        while self.currentlyPlaying:
-            if player1.turn:
-                if self.turnScore == 0:
-
-                    firstRoll = self.rollDice()
-
-                    if firstRoll:
-
-                        print(f"> [{p1Name}](Points: {player1.score}): Your first roll for this round is: ", firstRoll,"\n")
-                    else:
-                        self.switchTurns(player1, player2, True)
-                else:
-                    self.switchTurns(player1, player2, False)
-
-            time.sleep(1)
-            if player2.turn:
-                if self.turnScore == 0:
-                    firstRoll = self.rollDice()
-
-                    if firstRoll:
-                        print(f"> [{p2Name}](Points: {player2.score}): Your first roll for this round is: ", firstRoll,"\n")
-                    else:
-                        self.switchTurns(player1, player2, True)
-                else:
-                    self.switchTurns(player1, player2, False)
 
     def isWinner(self, player):
         """ This Method returns a boolean value based on whether or not a player has reached 100 points"""
@@ -182,8 +350,12 @@ class Dice:
 
 
 def main():
-    game = GipGame()
-    game.play()
+    app = QtWidgets.QApplication(sys.argv)
+    StartWindow = QtWidgets.QMainWindow()
+    ui = Ui_StartWindow()
+    ui.setupUi(StartWindow)
+    StartWindow.show()
+    sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
