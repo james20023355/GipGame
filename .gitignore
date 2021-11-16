@@ -1,0 +1,4 @@
+venv/
+.idea/
+game/PyQtTest.py
+game/__pycache__
